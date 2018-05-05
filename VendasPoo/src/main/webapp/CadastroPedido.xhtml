@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Cadastro de Pedido</title>
+	<meta charset="UTF-8" />
+	
+
+</h:head>
+<body>
+	
+		<h:form id="formp">
+		<p:panelGrid columns="2">
+			
+			<p:outputLabel value="Numero:" />
+			<p:inputText value="#{pedidoBean.itemselecionado.numero}" />
+		
+			<p:outputLabel value="Quantidade:" />
+			<p:inputText value="#{pedidoBean.itemselecionado.quantidade}" />
+			
+		</p:panelGrid>							
+							
+			<h2>Lista de produto Exportação</h2>
+			<p:dataTable var="pro" value="#{prodBean.produtos1}" editable ="false" editMode="cell">
+				<p:column id="cod" headerText="Codigo">
+					<p:cellEditor>
+						<f:facet name="output"><p:outputLabel value="#{pro.codigo}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{pro.codigo}" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column id="nome" headerText="Nome">
+					<p:cellEditor>
+						<f:facet name="output"><p:outputLabel value="#{pro.nome}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{pro.nome}" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column id="categoria" headerText="categoria">
+					<p:cellEditor>
+						<f:facet name="output"><p:outputLabel value="#{pro.categoria.descricao}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{pro.categoria.descricao}" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column id="preco" headerText="Preço">
+					<p:cellEditor>
+						<f:facet name="output"><p:outputLabel value="#{pro.preco}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{pro.preco}" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column id="moeda" headerText="Moeda">
+					<p:outputLabel value="#{pro.moeda}" />
+				</p:column>
+				<p:column id="imposto" headerText="Imposto">
+					<p:outputLabel value="#{pro.imposto}" />
+				</p:column>
+
+				<p:column id="destino" headerText="Destino ">
+					<p:cellEditor>
+						<f:facet name="output"><p:outputLabel value="#{pro.destino}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{pro.destino}" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				
+				<p:column >
+						<p:commandLink value="Comprar" action="#{pedidoBean.defpro(pro)}" update="formp"/>
+				</p:column>
+				
+			</p:dataTable>
+			
+			<h2>Lista de produto Mercado Interno</h2>
+			<p:dataTable var="pro" value="#{prodBean.produtos}" editable ="false" editMode="cell">
+				<p:column id="cod" headerText="Codigo">
+					<p:cellEditor>
+						<f:facet name="output"><p:outputLabel value="#{pro.codigo}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{pro.codigo}" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column id="nome" headerText="Nome">
+					<p:cellEditor>
+						<f:facet name="output"><p:outputLabel value="#{pro.nome}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{pro.nome}" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column id="categoria" headerText="categoria">
+					<p:cellEditor>
+						<f:facet name="output"><p:outputLabel value="#{pro.categoria.descricao}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{pro.categoria.descricao}" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column id="preco" headerText="Preço">
+					<p:cellEditor>
+						<f:facet name="output"><p:outputLabel value="#{pro.preco}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{pro.preco}" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column id="moeda" headerText="Moeda">
+					<p:outputLabel value="#{pro.moeda}" />
+				</p:column>
+				<p:column id="imposto" headerText="Imposto">
+					<p:outputLabel value="#{pro.imposto}" />
+				</p:column>
+
+				<p:column id="incentivo" headerText="Incentivo ">
+					<p:cellEditor>
+						<f:facet name="output"><p:outputLabel value="#{pro.incentivo}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{pro.incentivo}" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				
+				<p:column >
+						<p:commandLink value="Comprar" action="#{pedidoBean.defpro(pro)}" update="formp"/>
+				</p:column>
+				
+			</p:dataTable>
+			
+			<p:commandButton action="#{pedidoBean.salvaritem()}" 
+									value="Salvar"
+									update=":formp" />
+									
+			<h2>Lista de itens</h2>
+			<p:dataTable var="ite" value="#{pedidoBean.listai}" editable ="true" editMode="cell">
+				<p:column id="num" headerText="Número">
+					<p:cellEditor>
+						<f:facet name="output"><p:outputLabel value="#{ite.numero}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{ite.numero}" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column  headerText="Quantidade">
+					<p:cellEditor>
+						<f:facet name="output"><p:outputLabel value="#{ite.quantidade}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{ite.quantidade}" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column  headerText="Codigo Produto">
+					<p:cellEditor>
+						<f:facet name="output"><p:outputLabel value="#{ite.produto.codigo}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{ite.produto.codigo}" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column  headerText="Nome Produto">
+					<p:cellEditor>
+						<f:facet name="output"><p:outputLabel value="#{ite.produto.nome}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{ite.produto.nome}" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+								
+				<p:column>
+						<p:commandLink value="Remover" action="#{pedidoBean.removeit(ite)}" update="formp"/>
+				</p:column>
+				
+			</p:dataTable>
+			
+			<br /><p:panelGrid columns="2">
+			
+				<p:outputLabel value="Numero:" />
+				<p:inputText value="#{pedidoBean.pedidoselecionado.numero}" />
+		
+			</p:panelGrid>	
+			
+			<h2>Lista de pessoas Cadastradas</h2>
+			<p:dataTable var="cli" value="#{cadastroPessoa.lista}" editable ="false" editMode="cell">
+				<p:column id="cod" headerText="Codigo">
+					<p:cellEditor>
+						<f:facet name="output"><p:outputLabel value="#{cli.cod}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{cli.cod}" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column id="nome" headerText="Nome">
+					<p:cellEditor>
+						<f:facet name="output"><p:outputLabel value="#{cli.nome}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{cli.nome}" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column>
+					<p:commandLink value="Utilizar" 
+									action="#{pedidoBean.definircli(cli)}" 
+									update="formp"></p:commandLink>
+				</p:column>
+					
+			</p:dataTable>
+			
+			<p:commandButton 	action="#{pedidoBean.salvarpedido()}" 
+									value="Salvar"
+									update=":formp" />
+			
+			
+			<h2>Lista de pedidos</h2>
+			<p:dataTable var="pedi" value="#{pedidoBean.listap}" editable ="false" editMode="cell">
+				<p:column  headerText="Número">
+					<p:cellEditor>
+						<f:facet name="output"><p:outputLabel value="#{pedi.numero}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{pedi.numero}" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column  headerText="Data">
+					<p:cellEditor>
+						<f:facet name="output"><p:outputLabel value="#{pedi.data}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{pedi.data}" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column  headerText="Cliente">
+					<p:cellEditor>
+						<f:facet name="output"><p:outputLabel value="#{pedi.cliente}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{pedi.cliente}" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				
+				<p:column >
+						<p:commandLink value="Remover" action="#{pedidoBean.removerpedi(pedi)}" update="formp"/>
+				</p:column>
+				
+				
+					
+			</p:dataTable>
+						
+				
+		</h:form>
+			
+</body>
+</html>
